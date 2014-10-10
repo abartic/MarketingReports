@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template/master_layout.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewCampaignDataTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewCampaignDataLabel_campaignDataId}"/>
+                    <h:outputText value="#{campaignDataController.selected.campaignDataId}" title="#{bundle.ViewCampaignDataTitle_campaignDataId}"/>
+                    <h:outputText value="#{bundle.ViewCampaignDataLabel_noWeek}"/>
+                    <h:outputText value="#{campaignDataController.selected.noWeek}" title="#{bundle.ViewCampaignDataTitle_noWeek}"/>
+                    <h:outputText value="#{bundle.ViewCampaignDataLabel_weekDescr}"/>
+                    <h:outputText value="#{campaignDataController.selected.weekDescr}" title="#{bundle.ViewCampaignDataTitle_weekDescr}"/>
+                    <h:outputText value="#{bundle.ViewCampaignDataLabel_medium}"/>
+                    <h:outputText value="#{campaignDataController.selected.medium}" title="#{bundle.ViewCampaignDataTitle_medium}"/>
+                    <h:outputText value="#{bundle.ViewCampaignDataLabel_adType}"/>
+                    <h:outputText value="#{campaignDataController.selected.adType}" title="#{bundle.ViewCampaignDataTitle_adType}"/>
+                    <h:outputText value="#{bundle.ViewCampaignDataLabel_country}"/>
+                    <h:outputText value="#{campaignDataController.selected.country}" title="#{bundle.ViewCampaignDataTitle_country}"/>
+                    <h:outputText value="#{bundle.ViewCampaignDataLabel_impressions}"/>
+                    <h:outputText value="#{campaignDataController.selected.impressions}" title="#{bundle.ViewCampaignDataTitle_impressions}"/>
+                    <h:outputText value="#{bundle.ViewCampaignDataLabel_clicks}"/>
+                    <h:outputText value="#{campaignDataController.selected.clicks}" title="#{bundle.ViewCampaignDataTitle_clicks}"/>
+                    <h:outputText value="#{bundle.ViewCampaignDataLabel_cost}"/>
+                    <h:outputText value="#{campaignDataController.selected.cost}" title="#{bundle.ViewCampaignDataTitle_cost}"/>
+                    <h:outputText value="#{bundle.ViewCampaignDataLabel_campaignId}"/>
+                    <h:outputText value="#{campaignDataController.selected.campaignId}" title="#{bundle.ViewCampaignDataTitle_campaignId}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{campaignDataController.destroyAndView}" value="#{bundle.ViewCampaignDataDestroyLink}"/>
+                <br />
+                <br />
+                <h:link outcome="Edit" value="#{bundle.ViewCampaignDataEditLink}"/>
+                <br />
+                <h:commandLink action="#{campaignDataController.prepareCreate}" value="#{bundle.ViewCampaignDataCreateLink}" />
+                <br />
+                <h:commandLink action="#{campaignDataController.prepareList}" value="#{bundle.ViewCampaignDataShowAllLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ViewCampaignDataIndexLink}"/>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

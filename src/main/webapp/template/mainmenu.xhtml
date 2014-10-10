@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:form>
+	<p:growl autoUpdate="true" />
+
+	<p:panelMenu style="heiht:100%; ">
+		<p:submenu label="Campaigns">
+			<p:menuitem value="Campaigns" url="/faces/campaign/List.xhtml" ajax="false"/>
+			<p:menuitem value="New campaign" url="/faces/campaign/Create.xhtml" ajax="false"/>
+		</p:submenu>
+		<p:separator />
+		<p:submenu label="Campaigns">
+			
+			<p:menuitem value="Campaigns detail" url="/faces/campaignData/List.xhtml" ajax="false"/>
+		</p:submenu>
+		<p:separator />
+		<p:submenu label="Admin">
+			<p:menuitem value="Users" url="/faces/user/List.xhtml" ajax="false" />
+		</p:submenu>
+
+	</p:panelMenu>
+</h:form>
+</html>

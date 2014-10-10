@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+
+<ui:composition template="/template/master_layout.xhtml">
+
+	<ui:define name="title">
+		<h:outputText value="#{bundle.ListCampaignTitle}"></h:outputText>
+	</ui:define>
+
+	<ui:define name="body">
+
+		<f:verbatim>
+			<script type="text/javascript">
+				function handleComplete(xhr, status, args) {
+					if (args.validationFailed) {
+						alert("Validation Failed");
+					} else {
+		
+						window.open('../report/' + args.id, '_blank');
+					}
+				}
+			</script>
+		</f:verbatim>
+
+		<p:ajaxStatus onstart="PF('statusDialog').show()"
+			onsuccess="PF('statusDialog').hide()" />
+
+		<p:dialog widgetVar="statusDialog" modal="true" draggable="false"
+			closable="false" resizable="false" showHeader="false">
+			<p:graphicImage value="/Images/AjaxLoading.gif" />
+		</p:dialog>
+
+		<h:form styleClass="jsfcrud_list_form" id="form">
+
+			<p:growl id="growl1" showDetail="true" sticky="true" life="3000" />
+
+			<h:panelGroup id="messagePanel" layout="block">
+				<h:messages errorStyle="color: red" infoStyle="color: green"
+					layout="table" />
+			</h:panelGroup>
+			<h:outputText escape="false" value="#{bundle.ListCampaignEmpty}"
+				rendered="#{campaignController.items.rowCount == 0}" />
+			<h:panelGroup rendered="#{campaignController.items.rowCount > 0}">
+
+				<p:dataTable value="#{campaignController.items}" var="item"
+					border="0" cellpadding="2" cellspacing="0"
+					rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all"
+					style="border:solid 1px" id="customerTable" rows="10"
+					paginator="true"
+					paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks}  {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+					rowsPerPageTemplate="5,10,15" lazy="true" resizableColumns="true"
+					liveResize="true">
+
+
+					<p:column sortBy="#{item.campaignDescr}"
+						filterBy="#{item.campaignDescr}" filterMatchMode="contains"
+						resizable="true" filterPosition="bottom">
+						<f:facet name="header">
+							<h:outputText value="#{bundle.ListCampaignTitle_campaignDescr}" />
+						</f:facet>
+						<h:outputText value="#{item.campaignDescr}" />
+					</p:column>
+					<p:column sortBy="#{item.loadDate}" filterBy="#{item.loadDate}"
+						filterMatchMode="contains" resizable="true"
+						filterPosition="bottom">
+						<f:facet name="header">
+							<h:outputText value="#{bundle.ListCampaignTitle_loadDate}" />
+						</f:facet>
+						<h:outputText value="#{item.loadDate}">
+							<f:convertDateTime pattern="MM/dd/yyyy" />
+						</h:outputText>
+					</p:column>
+					<p:column sortBy="#{item.startDate}" filterBy="#{item.startDate}"
+						filterMatchMode="contains" resizable="true"
+						filterPosition="bottom">
+						<f:facet name="header">
+							<h:outputText value="#{bundle.ListCampaignTitle_startDate}" />
+						</f:facet>
+						<h:outputText value="#{item.startDate}">
+							<f:convertDateTime pattern="MM/dd/yyyy" />
+						</h:outputText>
+					</p:column>
+					<p:column sortBy="#{item.endDate}" filterBy="#{item.endDate}"
+						filterMatchMode="contains" resizable="true"
+						filterPosition="bottom">
+						<f:facet name="header">
+							<h:outputText value="#{bundle.ListCampaignTitle_endDate}" />
+						</f:facet>
+						<h:outputText value="#{item.endDate}">
+							<f:convertDateTime pattern="MM/dd/yyyy" />
+						</h:outputText>
+					</p:column>
+					<p:column sortBy="#{item.fileName}" filterBy="#{item.fileName}"
+						filterMatchMode="contains" resizable="true"
+						filterPosition="bottom">
+						<f:facet name="header">
+							<h:outputText value="#{bundle.ListCampaignTitle_fileName}" />
+						</f:facet>
+						<h:outputText value="#{item.fileName}" />
+					</p:column>
+
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="&nbsp;" />
+						</f:facet>
+
+						<p:commandLink oncomplete="handleComplete(xhr, status, args)" 
+							value="#{bundle.ListCampaignGenerateReportLink}"
+							action="#{campaignController.generateReport(item)}"
+							update=":form:growl1">
+						</p:commandLink>
+
+
+						<!-- 						<p:commandButton value="Show Dialog" -->
+						<!-- 							onclick="PF('dlg').show(); PF('dlg').toggleMaximize();" -->
+						<!-- 							type="button" /> -->
+
+						<h:commandLink action="#{campaignController.prepareView}"
+							value="#{bundle.ListCampaignViewLink}" />
+						<h:outputText value=" " />
+						<h:commandLink action="#{campaignController.prepareEdit}"
+							value="#{bundle.ListCampaignEditLink}" />
+						<h:outputText value=" " />
+						<h:commandLink action="#{campaignController.destroy}"
+							value="#{bundle.ListCampaignDestroyLink}" />
+						<h:outputText value=" " />
+						<h:commandLink action="#{campaignController.importExcelFile}"
+							value="#{bundle.ListCampaignGenerateImportDataLink}" />
+						<h:outputText value=" " />
+
+
+						<!-- 						<p:dialog header="Dialog" widgetVar="dlg" closeOnEscape="true" -->
+						<!-- 							resizable="false" draggable="false" modal="true" -->
+						<!-- 							style="width: auto !important; height: auto !important;" -->
+						<!-- 							onHide="PF('dlg').toggleMaximize();"> -->
+						<!-- 							<p:media value="/report.pdf?id=100" player="pdf" -->
+						<!-- 								style="width:100%; height:auto; min-height:800px" /> -->
+						<!-- 						</p:dialog> -->
+
+					</p:column>
+				</p:dataTable>
+			</h:panelGroup>
+
+		</h:form>
+
+	</ui:define>
+</ui:composition>
+
+</html>

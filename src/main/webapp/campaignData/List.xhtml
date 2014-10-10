@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/template/master_layout.xhtml">
+
+	<ui:define name="title">
+		<h:outputText value="#{bundle.ListCampaignDataTitle}"></h:outputText>
+	</ui:define>
+
+	<ui:define name="body">
+		
+
+		<h:form styleClass="jsfcrud_list_form">
+			<h:panelGroup id="messagePanel" layout="block">
+				<h:messages errorStyle="color: red" infoStyle="color: green"
+					layout="table" />
+			</h:panelGroup>
+			<h:outputText escape="false" value="#{bundle.ListCampaignDataEmpty}"
+				rendered="#{campaignDataController.items.rowCount == 0}" />
+			<h:panelGroup rendered="#{campaignDataController.items.rowCount > 0}">
+
+
+				<p:dataTable value="#{campaignDataController.items}" var="item"
+					border="0" cellpadding="2" cellspacing="0"
+					rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all"
+					style="border:solid 1px" id="customerTable" rows="10"
+					paginator="true"
+					paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks}  {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+					rowsPerPageTemplate="5,10,15" lazy="true" resizableColumns="true"
+					liveResize="true">
+
+
+					<p:column sortBy="#{item.noWeek}" filterBy="#{item.noWeek}"
+						filterMatchMode="contains" resizable="true"
+						filterPosition="bottom">
+						<f:facet name="header">
+							<h:outputText value="#{bundle.ListCampaignDataTitle_noWeek}" />
+						</f:facet>
+						<h:outputText value="#{item.noWeek}" />
+					</p:column>
+					<p:column sortBy="#{item.weekDescr}" filterBy="#{item.weekDescr}"
+						filterMatchMode="contains" resizable="true"
+						filterPosition="bottom">
+						<f:facet name="header">
+							<h:outputText value="#{bundle.ListCampaignDataTitle_weekDescr}" />
+						</f:facet>
+						<h:outputText value="#{item.weekDescr}" />
+					</p:column>
+					<p:column sortBy="#{item.medium}" filterBy="#{item.medium}"
+						filterMatchMode="contains" resizable="true"
+						filterPosition="bottom">
+						<f:facet name="header">
+							<h:outputText value="#{bundle.ListCampaignDataTitle_medium}" />
+						</f:facet>
+						<h:outputText value="#{item.medium}" />
+					</p:column>
+					<p:column sortBy="#{item.adType}" filterBy="#{item.adType}"
+						filterMatchMode="contains" resizable="true"
+						filterPosition="bottom">
+						<f:facet name="header">
+							<h:outputText value="#{bundle.ListCampaignDataTitle_adType}" />
+						</f:facet>
+						<h:outputText value="#{item.adType}" />
+					</p:column>
+					<p:column sortBy="#{item.country}" filterBy="#{item.country}"
+						filterMatchMode="contains" resizable="true"
+						filterPosition="bottom">
+						<f:facet name="header">
+							<h:outputText value="#{bundle.ListCampaignDataTitle_country}" />
+						</f:facet>
+						<h:outputText value="#{item.country}" />
+					</p:column>
+					<p:column sortBy="#{item.impressions}"
+						filterBy="#{item.impressions}" filterMatchMode="contains"
+						resizable="true" filterPosition="bottom">
+						<f:facet name="header">
+							<h:outputText value="#{bundle.ListCampaignDataTitle_impressions}" />
+						</f:facet>
+						<h:outputText value="#{item.impressions}" />
+					</p:column>
+					<p:column sortBy="#{item.clicks}" filterBy="#{item.clicks}"
+						filterMatchMode="contains" resizable="true"
+						filterPosition="bottom">
+						<f:facet name="header">
+							<h:outputText value="#{bundle.ListCampaignDataTitle_clicks}" />
+						</f:facet>
+						<h:outputText value="#{item.clicks}" />
+					</p:column>
+					<p:column sortBy="#{item.cost}" filterBy="#{item.cost}"
+						filterMatchMode="contains" resizable="true"
+						filterPosition="bottom">
+						<f:facet name="header">
+							<h:outputText value="#{bundle.ListCampaignDataTitle_cost}" />
+						</f:facet>
+						<h:outputText value="#{item.cost}" />
+					</p:column>
+
+					<p:column>
+						<f:facet name="header">
+							<h:outputText value="&nbsp;" />
+						</f:facet>
+						<h:commandLink action="#{campaignDataController.prepareView}"
+							value="#{bundle.ListCampaignDataViewLink}" />
+						<h:outputText value=" " />
+						<h:commandLink action="#{campaignDataController.prepareEdit}"
+							value="#{bundle.ListCampaignDataEditLink}" />
+						<h:outputText value=" " />
+						<h:commandLink action="#{campaignDataController.destroy}"
+							value="#{bundle.ListCampaignDataDestroyLink}" />
+					</p:column>
+				</p:dataTable>
+			</h:panelGroup>
+
+		</h:form>
+	</ui:define>
+</ui:composition>
+
+</html>

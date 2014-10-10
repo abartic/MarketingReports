@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+
+
+
+
+<ui:composition template="/template/master_layout.xhtml">
+	<ui:define name="title">
+		<h:outputText value="#{bundle.EditCampaignTitle}"></h:outputText>
+	</ui:define>
+	<ui:define name="body">
+
+		<f:event listener="#{campaignController.handleEvent}"
+			type="preRenderView" />
+		<h:form>
+			<p:messages id="messages" showDetail="true" autoUpdate="true"
+				closable="true" />
+		</h:form>
+
+
+		<h:form enctype="multipart/form-data">
+			<h:panelGrid columns="2">
+				<h:outputLabel value="#{bundle.EditCampaignLabel_campaignId}"
+					for="campaignId" />
+				<h:inputText id="campaignId"
+					value="#{campaignController.selected.campaignId}"
+					title="#{bundle.EditCampaignTitle_campaignId}" required="true"
+					requiredMessage="#{bundle.EditCampaignRequiredMessage_campaignId}" />
+				<h:outputLabel value="#{bundle.EditCampaignLabel_campaignDescr}"
+					for="campaignDescr" />
+				<h:inputText id="campaignDescr"
+					value="#{campaignController.selected.campaignDescr}"
+					title="#{bundle.EditCampaignTitle_campaignDescr}" required="true"
+					requiredMessage="#{bundle.EditCampaignRequiredMessage_campaignDescr}" />
+				<h:outputLabel value="#{bundle.EditCampaignLabel_loadDate}"
+					for="loadDate" />
+				<h:inputText id="loadDate"
+					value="#{campaignController.selected.loadDate}"
+					title="#{bundle.EditCampaignTitle_loadDate}" required="true"
+					requiredMessage="#{bundle.EditCampaignRequiredMessage_loadDate}">
+					<f:convertDateTime pattern="MM/dd/yyyy" />
+				</h:inputText>
+				<h:outputLabel value="#{bundle.EditCampaignLabel_startDate}"
+					for="startDate" />
+				<h:inputText id="startDate"
+					value="#{campaignController.selected.startDate}"
+					title="#{bundle.EditCampaignTitle_startDate}" required="true"
+					requiredMessage="#{bundle.EditCampaignRequiredMessage_startDate}">
+					<f:convertDateTime pattern="MM/dd/yyyy" />
+				</h:inputText>
+				<h:outputLabel value="#{bundle.EditCampaignLabel_endDate}"
+					for="endDate" />
+				<h:inputText id="endDate"
+					value="#{campaignController.selected.endDate}"
+					title="#{bundle.EditCampaignTitle_endDate}" required="true"
+					requiredMessage="#{bundle.EditCampaignRequiredMessage_endDate}">
+					<f:convertDateTime pattern="MM/dd/yyyy" />
+				</h:inputText>
+				<h:outputLabel value="#{bundle.EditCampaignLabel_fileName}"
+					for="fileName" />
+				<h:outputLabel id="fileName"
+					value="#{campaignController.selected.fileName}"
+					title="#{bundle.EditCampaignTitle_fileName}" />
+
+
+
+				<h:outputLabel value="For uploading authorize Dropbox..."
+					for="btnAuth" rendered="#{campaignController.isAuthAvailable}" />
+				<p:commandButton name="btnAuth" value="Auth"
+					actionListener="#{campaignController.callAuth}" ajax="false"
+					rendered="#{campaignController.isAuthAvailable}">
+				</p:commandButton>
+
+				<h:outputLabel value="#{bundle.EditCampaignLabel_file}" for="file"
+					rendered="#{campaignController.isUploadAvailable}" />
+				<p:fileUpload name="file"
+					value="#{campaignController.selected.file}" multiple="false"
+					showButtons="false" mode="simple"
+					allowTypes="/(\.|\/)(xlsx|xls|jpe?g)$/" auto="false" fileLimit="1"
+					rendered="#{campaignController.isUploadAvailable}">
+				</p:fileUpload>
+
+			</h:panelGrid>
+
+
+
+			<p:commandButton value="#{bundle.EditCampaignSaveLink}"
+				actionListener="#{campaignController.update}" ajax="false" />
+		</h:form>
+
+
+	</ui:define>
+</ui:composition>
+
+</html>

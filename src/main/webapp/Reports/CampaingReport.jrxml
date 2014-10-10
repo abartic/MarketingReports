@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version last-->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="dd290e81-9cca-4f9f-b91c-2ec41b00c78e">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="69"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<parameter name="CampaignID" class="java.lang.Integer"/>
+	<queryString>
+		<![CDATA[SELECT
+     campaign_data.`campaign_data_id` AS campaign_data_campaign_data_id,
+     campaign_data.`campaign_id` AS campaign_data_campaign_id,
+     campaign_data.`no_week` AS campaign_data_no_week,
+     campaign_data.`week_descr` AS campaign_data_week_descr,
+     campaign_data.`medium` AS campaign_data_medium,
+     campaign_data.`ad_type` AS campaign_data_ad_type,
+     campaign_data.`country` AS campaign_data_country,
+     campaign_data.`impressions` AS campaign_data_impressions,
+     campaign_data.`clicks` AS campaign_data_clicks,
+     campaign_data.`cost` AS campaign_data_cost
+FROM
+     `campaign_data` campaign_data
+WHERE 
+	campaign_data.campaign_id =  $P{CampaignID}]]>
+	</queryString>
+	<field name="campaign_data_campaign_data_id" class="java.lang.Integer"/>
+	<field name="campaign_data_campaign_id" class="java.lang.Integer"/>
+	<field name="campaign_data_no_week" class="java.lang.Integer"/>
+	<field name="campaign_data_week_descr" class="java.lang.String"/>
+	<field name="campaign_data_medium" class="java.lang.String"/>
+	<field name="campaign_data_ad_type" class="java.lang.String"/>
+	<field name="campaign_data_country" class="java.lang.String"/>
+	<field name="campaign_data_impressions" class="java.lang.Integer"/>
+	<field name="campaign_data_clicks" class="java.lang.Integer"/>
+	<field name="campaign_data_cost" class="java.lang.Double"/>
+	<group name="week" keepTogether="true">
+		<groupExpression><![CDATA[$F{campaign_data_no_week}]]></groupExpression>
+		<groupHeader>
+			<band height="18">
+				<textField>
+					<reportElement x="0" y="0" width="555" height="18" uuid="806e2bb9-08f2-4728-8708-79eaf0141a71"/>
+					<textElement>
+						<font size="12" isBold="true" isItalic="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Week: " + $F{campaign_data_week_descr}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="385">
+				<pie3DChart>
+					<chart isShowLegend="true" theme="default">
+						<reportElement x="6" y="19" width="400" height="366" uuid="9c638b73-c006-4c40-9e51-d54f3a4bb8c3"/>
+						<chartTitle/>
+						<chartSubtitle/>
+						<chartLegend/>
+					</chart>
+					<pieDataset>
+						<dataset resetType="Group" resetGroup="week"/>
+						<keyExpression><![CDATA[$F{campaign_data_country}]]></keyExpression>
+						<valueExpression><![CDATA[$F{campaign_data_impressions}]]></valueExpression>
+						<labelExpression><![CDATA[$F{campaign_data_impressions}.toString()]]></labelExpression>
+					</pieDataset>
+					<pie3DPlot isCircular="true">
+						<plot/>
+						<itemLabel>
+							<font size="8" isBold="true"/>
+						</itemLabel>
+					</pie3DPlot>
+				</pie3DChart>
+				<pie3DChart>
+					<chart isShowLegend="true" theme="default">
+						<reportElement x="403" y="19" width="400" height="366" uuid="e18081fb-b337-4257-a171-3f2ae6bafeba"/>
+						<chartTitle/>
+						<chartSubtitle/>
+						<chartLegend/>
+					</chart>
+					<pieDataset>
+						<dataset resetType="Group" resetGroup="week"/>
+						<keyExpression><![CDATA[$F{campaign_data_country}]]></keyExpression>
+						<valueExpression><![CDATA[$F{campaign_data_clicks}]]></valueExpression>
+						<labelExpression><![CDATA[$F{campaign_data_clicks}.toString()]]></labelExpression>
+					</pieDataset>
+					<pie3DPlot isCircular="true">
+						<plot/>
+						<itemLabel>
+							<font size="8" isBold="true"/>
+						</itemLabel>
+					</pie3DPlot>
+				</pie3DChart>
+				<staticText>
+					<reportElement x="484" y="4" width="100" height="20" uuid="50c5400b-2f09-4c59-a8e9-9460681ec545"/>
+					<textElement>
+						<font isBold="true" isItalic="true"/>
+					</textElement>
+					<text><![CDATA[Clicks:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="71" y="4" width="100" height="20" uuid="3cb0b22c-b36d-4135-bfad-1105ce535336"/>
+					<textElement>
+						<font isBold="true" isItalic="true"/>
+					</textElement>
+					<text><![CDATA[Impressions:]]></text>
+				</staticText>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="56" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="802" height="56" uuid="bc6103a9-a2a6-4bd1-9c6d-c9e9ec672af0"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="24" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Campaign Report]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="6" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="12" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band height="10" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="21" splitType="Stretch">
+			<textField>
+				<reportElement x="678" y="1" width="80" height="20" uuid="bb002624-9b27-46ba-93c6-686ccd433924"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="758" y="1" width="40" height="20" uuid="8096e89b-d420-47f7-9038-cfe38b1e7a98"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd-MMM-yyyy">
+				<reportElement x="4" y="1" width="100" height="20" uuid="decc9f80-c97c-447b-b85a-7d80787043f0"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="8" splitType="Stretch"/>
+	</summary>
+</jasperReport>

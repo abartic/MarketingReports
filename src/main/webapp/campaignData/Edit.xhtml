@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template/master_layout.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditCampaignDataTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditCampaignDataLabel_campaignDataId}" for="campaignDataId" />
+                    <h:inputText id="campaignDataId" value="#{campaignDataController.selected.campaignDataId}" title="#{bundle.EditCampaignDataTitle_campaignDataId}" required="true" requiredMessage="#{bundle.EditCampaignDataRequiredMessage_campaignDataId}"/>
+                    <h:outputLabel value="#{bundle.EditCampaignDataLabel_noWeek}" for="noWeek" />
+                    <h:inputText id="noWeek" value="#{campaignDataController.selected.noWeek}" title="#{bundle.EditCampaignDataTitle_noWeek}" required="true" requiredMessage="#{bundle.EditCampaignDataRequiredMessage_noWeek}"/>
+                    <h:outputLabel value="#{bundle.EditCampaignDataLabel_weekDescr}" for="weekDescr" />
+                    <h:inputText id="weekDescr" value="#{campaignDataController.selected.weekDescr}" title="#{bundle.EditCampaignDataTitle_weekDescr}" required="true" requiredMessage="#{bundle.EditCampaignDataRequiredMessage_weekDescr}"/>
+                    <h:outputLabel value="#{bundle.EditCampaignDataLabel_medium}" for="medium" />
+                    <h:inputText id="medium" value="#{campaignDataController.selected.medium}" title="#{bundle.EditCampaignDataTitle_medium}" required="true" requiredMessage="#{bundle.EditCampaignDataRequiredMessage_medium}"/>
+                    <h:outputLabel value="#{bundle.EditCampaignDataLabel_adType}" for="adType" />
+                    <h:inputText id="adType" value="#{campaignDataController.selected.adType}" title="#{bundle.EditCampaignDataTitle_adType}" required="true" requiredMessage="#{bundle.EditCampaignDataRequiredMessage_adType}"/>
+                    <h:outputLabel value="#{bundle.EditCampaignDataLabel_country}" for="country" />
+                    <h:inputText id="country" value="#{campaignDataController.selected.country}" title="#{bundle.EditCampaignDataTitle_country}" required="true" requiredMessage="#{bundle.EditCampaignDataRequiredMessage_country}"/>
+                    <h:outputLabel value="#{bundle.EditCampaignDataLabel_impressions}" for="impressions" />
+                    <h:inputText id="impressions" value="#{campaignDataController.selected.impressions}" title="#{bundle.EditCampaignDataTitle_impressions}" required="true" requiredMessage="#{bundle.EditCampaignDataRequiredMessage_impressions}"/>
+                    <h:outputLabel value="#{bundle.EditCampaignDataLabel_clicks}" for="clicks" />
+                    <h:inputText id="clicks" value="#{campaignDataController.selected.clicks}" title="#{bundle.EditCampaignDataTitle_clicks}" required="true" requiredMessage="#{bundle.EditCampaignDataRequiredMessage_clicks}"/>
+                    <h:outputLabel value="#{bundle.EditCampaignDataLabel_cost}" for="cost" />
+                    <h:inputText id="cost" value="#{campaignDataController.selected.cost}" title="#{bundle.EditCampaignDataTitle_cost}" required="true" requiredMessage="#{bundle.EditCampaignDataRequiredMessage_cost}"/>
+                    <h:outputLabel value="#{bundle.EditCampaignDataLabel_campaignId}" for="campaignId" />
+                    <h:selectOneMenu id="campaignId" value="#{campaignDataController.selected.campaignId}" title="#{bundle.EditCampaignDataTitle_campaignId}" required="true" requiredMessage="#{bundle.EditCampaignDataRequiredMessage_campaignId}">
+                        <f:selectItems value="#{campaignController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <h:commandLink action="#{campaignDataController.update}" value="#{bundle.EditCampaignDataSaveLink}"/>
+                <br />
+                <br />
+                <h:link outcome="View" value="#{bundle.EditCampaignDataViewLink}"/>
+                <br />
+                <h:commandLink action="#{campaignDataController.prepareList}" value="#{bundle.EditCampaignDataShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.EditCampaignDataIndexLink}" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

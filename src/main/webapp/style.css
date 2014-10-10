@@ -1,0 +1,11 @@
+@CHARSET "ISO-8859-1";
+
+.fileupload-buttonbar {
+    background: transparent none;
+    border: none;
+}
+
+.fileupload-content {
+    display: none;
+}
+

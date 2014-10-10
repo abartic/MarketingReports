@@ -1,0 +1,32 @@
+{
+    "id": "marketingreports",
+    "name": "Marketing Reports",
+    "source": "github",
+    "description" : "Basic Java EE 7 app deployed on Glassfish 4 Web Profile via Jenkins with maven",
+    "doc-url" : "https://github.com/CloudBees-community/glassfish4-clickstart/blob/master/README.md",
+    "icon" : "https://raw.github.com/CloudBees-community/glassfish4-clickstart/master/icon.png",
+    "disabled" : false,
+    "supported-by" : "community",
+    "app-package" : "https://repository-community.forge.cloudbees.com/release/org/abx/marketingreports/1.2/marketingreports-1.2-SNAPSHOT.war",
+    "order" : 100,
+   
+    "runtime": {
+        "type": "glassfish4",
+        "app-parameters" : {
+            "runtime.glassfish4.auth-realm.database": "mydb"
+        }
+    },
+    "databases": [
+        {
+            "type": "mysql",
+            "alias": "mydb"
+        }
+    ],
+    "build-with-jenkins": {
+        "template": {
+            "type": "maven",
+            "options": {
+            }
+        }
+    }
+}

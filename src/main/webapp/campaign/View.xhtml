@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template/master_layout.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewCampaignTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form enctype="multipart/form-data">
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewCampaignLabel_campaignId}"/>
+                    <h:outputText value="#{campaignController.selected.campaignId}" title="#{bundle.ViewCampaignTitle_campaignId}"/>
+                    <h:outputText value="#{bundle.ViewCampaignLabel_campaignDescr}"/>
+                    <h:outputText value="#{campaignController.selected.campaignDescr}" title="#{bundle.ViewCampaignTitle_campaignDescr}"/>
+                    <h:outputText value="#{bundle.ViewCampaignLabel_loadDate}"/>
+                    <h:outputText value="#{campaignController.selected.loadDate}" title="#{bundle.ViewCampaignTitle_loadDate}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:outputText>
+                    <h:outputText value="#{bundle.ViewCampaignLabel_startDate}"/>
+                    <h:outputText value="#{campaignController.selected.startDate}" title="#{bundle.ViewCampaignTitle_startDate}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:outputText>
+                    <h:outputText value="#{bundle.ViewCampaignLabel_endDate}"/>
+                    <h:outputText value="#{campaignController.selected.endDate}" title="#{bundle.ViewCampaignTitle_endDate}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:outputText>
+                    <h:outputText value="#{bundle.ViewCampaignLabel_fileName}"/>
+                    <h:outputText value="#{campaignController.selected.fileName}" title="#{bundle.ViewCampaignTitle_fileName}"/>
+                    <h:outputText value="#{bundle.ViewCampaignLabel_file}"/>
+                    <h:outputText value="#{campaignController.selected.file}" title="#{bundle.ViewCampaignTitle_file}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{campaignController.destroyAndView}" value="#{bundle.ViewCampaignDestroyLink}"/>
+                <br />
+                <br />
+                <h:link outcome="Edit" value="#{bundle.ViewCampaignEditLink}"/>
+                <br />
+                <h:commandLink action="#{campaignController.prepareCreate}" value="#{bundle.ViewCampaignCreateLink}" />
+                <br />
+                <h:commandLink action="#{campaignController.prepareList}" value="#{bundle.ViewCampaignShowAllLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ViewCampaignIndexLink}"/>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

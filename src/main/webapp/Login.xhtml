@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Login MReports</title>
+	<h:outputStylesheet library="css" name="jsfcrud.css" />
+</h:head>
+
+<h:body style="background: lightgray; height: 100%;">
+	<h:form style="background: lightgray; height: 100%;">
+		<p:outputLabel value="#{bundle.LoginTitle}"
+			style="font-size: 25pt; font-weight: bolder;" />
+
+		<p:spacer height="10" />
+
+		<p:separator />
+
+		<h:panelGrid columns="2" id="grid" cellpadding="5">
+			<p:outputLabel for="txtUserName" value="User name: " />
+			<p:inputText id="txtUserName"
+				value="#{loginController.sessionUser.username}" required="true" />
+
+			<p:outputLabel for="txtPassword" value="Password: " />
+			<p:password id="txtPassword"
+				value="#{loginController.sessionUser.password}" required="true" />
+		</h:panelGrid>
+
+		<p:commandButton value="Login" action="#{loginController.login}"
+			ajax="false" />
+
+		<p:spacer height="10" />
+
+		<p:messages id="messages" showDetail="true" autoUpdate="true"
+			errorStyle="color: red" infoStyle="color: green" layout="table" />
+	</h:form>
+</h:body>
+
+</html>

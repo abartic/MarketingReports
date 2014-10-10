@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+
+<ui:composition template="/template/master_layout.xhtml">
+	<ui:define name="title">
+		<h:outputText value="#{bundle.CreateCampaignTitle}"></h:outputText>
+	</ui:define>
+
+	<ui:define name="body">
+		<h:panelGroup id="messagePanel" layout="block">
+			<h:messages errorStyle="color: red" infoStyle="color: green"
+				layout="table" />
+		</h:panelGroup>
+		<h:form enctype="multipart/form-data" >
+			<h:panelGrid columns="2" >
+
+				<h:outputLabel value="#{bundle.CreateCampaignLabel_campaignId}"
+					for="campaignId" />
+				<h:inputText id="campaignId"
+					value="#{campaignController.selected.campaignId}"
+					title="#{bundle.CreateCampaignTitle_campaignId}" required="true"
+					requiredMessage="#{bundle.CreateCampaignRequiredMessage_campaignId}" />
+				<h:outputLabel value="#{bundle.CreateCampaignLabel_campaignDescr}"
+					for="campaignDescr" />
+				<h:inputText id="campaignDescr"
+					value="#{campaignController.selected.campaignDescr}"
+					title="#{bundle.CreateCampaignTitle_campaignDescr}" required="true"
+					requiredMessage="#{bundle.CreateCampaignRequiredMessage_campaignDescr}" />
+				<h:outputLabel value="#{bundle.CreateCampaignLabel_loadDate}"
+					for="loadDate" />
+				<h:inputText id="loadDate"
+					value="#{campaignController.selected.loadDate}"
+					title="#{bundle.CreateCampaignTitle_loadDate}" required="true"
+					requiredMessage="#{bundle.CreateCampaignRequiredMessage_loadDate}">
+					<f:convertDateTime pattern="MM/dd/yyyy" />
+				</h:inputText>
+				<h:outputLabel value="#{bundle.CreateCampaignLabel_startDate}"
+					for="startDate" />
+				<h:inputText id="startDate"
+					value="#{campaignController.selected.startDate}"
+					title="#{bundle.CreateCampaignTitle_startDate}" required="true"
+					requiredMessage="#{bundle.CreateCampaignRequiredMessage_startDate}">
+					<f:convertDateTime pattern="MM/dd/yyyy" />
+				</h:inputText>
+				<h:outputLabel value="#{bundle.CreateCampaignLabel_endDate}"
+					for="endDate" />
+				<h:inputText id="endDate"
+					value="#{campaignController.selected.endDate}"
+					title="#{bundle.CreateCampaignTitle_endDate}" required="true"
+					requiredMessage="#{bundle.CreateCampaignRequiredMessage_endDate}">
+					<f:convertDateTime pattern="MM/dd/yyyy" />
+				</h:inputText>
+				<h:outputLabel value="#{bundle.CreateCampaignLabel_fileName}"
+					for="fileName" />
+				<h:inputText id="fileName"
+					value="#{campaignController.selected.fileName}"
+					title="#{bundle.CreateCampaignTitle_fileName}" required="true"
+					requiredMessage="#{bundle.CreateCampaignRequiredMessage_fileName}" />
+				<h:outputLabel value="#{bundle.CreateCampaignLabel_file}" for="file" />
+				<h:inputText id="file" value="#{campaignController.selected.file}"
+					title="#{bundle.CreateCampaignTitle_file}" />
+
+				<h:outputLabel value="#{bundle.File_path}" for="filePath" />
+				<h:inputFile id="filePath"
+					value="#{campainsController.selected.file}"
+					title="#{bundle.File_path}" required="true"
+					requiredMessage="#{bundle.CreateCampainsRequiredMessage_endDate}">
+				</h:inputFile>
+			</h:panelGrid>
+			<br />
+			<h:commandLink action="#{campaignController.create}"
+				value="#{bundle.CreateCampaignSaveLink}" />
+			<br />
+			<br />
+			<h:commandLink action="#{campaignController.prepareList}"
+				value="#{bundle.CreateCampaignShowAllLink}" immediate="true" />
+			<br />
+			<br />
+			<h:link outcome="/index" value="#{bundle.CreateCampaignIndexLink}" />
+		</h:form>
+	</ui:define>
+
+</ui:composition>
+
+</html>
