@@ -106,18 +106,5 @@
             </extension>
         </extensions>
     </build>
-    <scm>
-        <connection>scm:git:https://github.com/CloudBees-community/glassfish4-clickstart.git</connection>
-      <tag>glassfish4-clickstart-1.0.0</tag>
-  </scm>
-    <distributionManagement>
-        <repository>
-            <id>community-release</id>
-            <url>dav:https://repository-community.forge.cloudbees.com/release/</url>
-        </repository>
-        <snapshotRepository>
-            <id>community-snapshot</id>
-            <url>dav:https://repository-community.forge.cloudbees.com/snapshot/</url>
-        </snapshotRepository>
-    </distributionManagement>
+    
 </project>
