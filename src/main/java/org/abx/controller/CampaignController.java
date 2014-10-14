@@ -375,7 +375,7 @@ public class CampaignController implements Serializable {
 		DbxClient client = new DbxClient(config, dbxAuth.accessToken);
 
 		String fullTargetPath = "/" + getUploadedFilename();
-		DbxEntry.File metadata;
+		DbxEntry.File metadata = null;
 
 		metadata = client
 				.uploadFile(fullTargetPath, DbxWriteMode.add(), current
